@@ -1,0 +1,44 @@
+<h1 class="cover-heading">{{title}}</h1>
+
+<div id="cy" ng-show="showCanvas" style="margin-top: 20px; min-width: 550px; min-height: 550px;border: 1px solid"></div>
+
+<div id="mainPanel" class="container-fluid">
+    <div class="row">
+        <p class="lead">{{subTitle}}</p>
+        <div class="col-md-2"></div>
+        <div class="col-md-8">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>Username</th>
+                    <th>Depth of the search</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>
+                        <div class="form-group">
+                            <input type="text" class="form-control" id="username" placeholder="">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="btn-group pull-left">
+                            <button data-toggle="dropdown" class="btn dropdown-toggle btn-primary"><span
+                                    class="glyphicon glyphicon-collapse-down"></span> {{mainCtl.span}}
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li ng-repeat="span in mainCtl.timeRanges"><a href="#" ng-click="mainCtl.setSpan(span)">{{span}}</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="col-md-2"></div>
+    </div>
+</div>
+<button class="btn btn-success" ng-click="mainCtl.request()">
+    <span class="glyphicon glyphicon-refresh"></span> Search
+</button>
