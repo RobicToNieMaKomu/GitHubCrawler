@@ -6,11 +6,11 @@ angular.module('githubCrawler').controller(
 				'$modal',
 				function($scope, $http) {
 					console.log('mainController!' + $scope.type);
-					var range = [ '1', '2', '3' ];
+					var range = [ 'a', 'b', 'c' ];
 					this.scope = $scope;
 					this.http = $http;
-					this.timeRanges = range;
-					this.span = this.timeRanges[0];
+					this.recentSearches = range;
+					this.search = 'TBD';
 					this.showCytoscape = function() {
 					    this.scope.showForm = !this.scope.showForm;
 					    this.scope.showCanvas = !this.scope.showCanvas;

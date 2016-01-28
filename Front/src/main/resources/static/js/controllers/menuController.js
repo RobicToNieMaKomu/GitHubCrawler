@@ -10,15 +10,21 @@ angular.module('githubCrawler').controller(
 				    $scope.showCrawler=true;
 				    $scope.showRecentSearches=false;
 				    $scope.showTopology=false;
+				    this.currentlyOpenTab = 'crawler';
 				    this.render = function(what) {
-				        console.log('what do you want fool? ' + what);
-				        this.scope['show' + this.capitalizeFirstLetter(what)] = !this.scope['show' + this.capitalizeFirstLetter(what)];
+				        if (this.currentlyOpenTab === what) {
+				            console.log('what do you want fool? ' + what);
+				        } else {
+				            var openTab = 'show' + this.capitalizeFirstLetter(what);
+				            var closeTab = 'show' + this.capitalizeFirstLetter(this.currentlyOpenTab);
+				            this.scope[closeTab] = !this.scope[closeTab];
+				            this.scope[openTab] = !this.scope[openTab];
+				            this.currentlyOpenTab = what;
+				        }
 				    }
 				    this.capitalizeFirstLetter = function(string) {
                         return string.charAt(0).toUpperCase() + string.slice(1);
                     }
 				}
-
-
 		]
 );

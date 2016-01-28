@@ -7,7 +7,7 @@
         <p class="lead">{{subTitle}}</p>
         <div class="col-md-2"></div>
         <div class="col-md-8">
-            <table class="table">
+            <table class="table" ng-show="type == 'crawler'">
                 <thead>
                 <tr>
                     <th>Username</th>
@@ -35,6 +35,15 @@
                 </tr>
                 </tbody>
             </table>
+            <div class="btn-group" ng-show="type == 'recentSearches'">
+                <button data-toggle="dropdown" class="btn dropdown-toggle btn-primary"><span
+                        class="glyphicon glyphicon-collapse-down"></span> {{mainCtl.search}}
+                </button>
+                <ul class="dropdown-menu">
+                    <li ng-repeat="search in mainCtl.recentSearches"><a href="#" ng-click="mainCtl.setSearch(search)">{{search}}</a>
+                    </li>
+                </ul>
+            </div>
         </div>
         <div class="col-md-2"></div>
     </div>
