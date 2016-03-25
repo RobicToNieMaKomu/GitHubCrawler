@@ -1,0 +1,10 @@
+<div class="btn-group">
+    <button data-toggle="dropdown" class="btn dropdown-toggle btn-primary"><span
+            class="glyphicon glyphicon-collapse-down"></span> {{mainCtl.recent}}
+    </button>
+    <ul class="dropdown-menu">
+        <li ng-repeat="recent in mainCtl.recentSearches"><a href="#" ng-click="mainCtl.set('search', recent)">{{recent}}</a>
+        </li>
+    </ul>
+    <hr>
+</div>

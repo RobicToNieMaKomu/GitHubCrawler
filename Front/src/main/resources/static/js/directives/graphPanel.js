@@ -1,15 +1,16 @@
-angular.module('githubCrawler').directive('ngGraphPanel',
+angular.module('githubCrawler').directive('ngPanel',
   function() {
       return {
         scope: {
               title: '@',
               subTitle: '@',
               showForm: '@',
-              type: '@'
+              type: '@',
+              showCanvas: '@'
         },
         controller: 'mainController',
         controllerAs: 'mainCtl',
-        restrict: "EA",
-        templateUrl: 'templates/ng-graph-panel.html'
+        restrict: "E",
+        templateUrl: 'templates/graphPanel.html'
       }
 });

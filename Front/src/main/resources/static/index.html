@@ -20,14 +20,20 @@
     <![endif]-->
 
     <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.19/angular.min.js"></script>
     <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.19/angular-animate.js"></script>
     <script src="./js/app.js"></script>
+    <!--<script src="./js/services/graphService.js"></script>-->
     <script src="./js/controllers/menuController.js"></script>
     <script src="./js/controllers/mainController.js"></script>
     <script src="./js/directives/graphPanel.js"></script>
+    <script src="./js/directives/recentSearches.js"></script>
+    <script src="./js/directives/crawler.js"></script>
     <script src="http://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.10.0/ui-bootstrap-tpls.min.js"></script>
+    <script src="./js/lib/cytoscape.js"></script>
+    <script src="./js/grapher.js"></script>
 </head>
 
 <body>
@@ -37,34 +43,20 @@
     <div class="site-wrapper-inner">
 
         <div class="cover-container" ng-controller="menuController as menu">
-
             <div class="masthead clearfix">
                 <div class="inner">
                     <h3 class="masthead-brand">GitHub Crawler</h3>
-                        <ul class="nav nav-tabs pull-right">
-                            <li role="presentation" class="active" ng-click="menu.render('crawler')"><a href="#">Crawler</a></li>
-                            <li role="presentation" ng-click="menu.render('recentSearches')"><a href="#">Recent searches</a></li>
-                            <li role="presentation" ng-click="menu.render('topology')"><a href="#">Full topology</a></li>
-                        </ul>
+                    <ul class="nav nav-tabs pull-right">
+                        <li role="presentation" ng-repeat="tab in menu.tabs" ng-click="menu.setPanel(tab.id)"><a href="#">{{tab.name}}</a></li>
+                    </ul>
                 </div>
             </div>
 
             <div class="inner cover">
-                <ng-graph-panel title="Find GitHub connections"
-                                sub-title="Enter username and choose how deeply GitHubCrawler should search for connections"
-                                type="crawler"
-                                ng-show="showCrawler">
-                </ng-graph-panel>
-                <ng-graph-panel title="Show recent searches"
-                                sub-title="Display recent GitHub connections searched by other users"
-                                type="recentSearches"
-                                ng-show="showRecentSearches">
-                </ng-graph-panel>
-                <ng-graph-panel title="Show full topology"
-                                sub-title="Constructs one graph by using all historic searches"
-                                type="fullTopology"
-                                ng-show="showTopology">
-                </ng-graph-panel>
+                <ng-panel   title="{{menu.panel.title}}"
+                            sub-title="{{menu.panel.subtitle}}"
+                            type="{{menu.panel.type}}">
+                </ng-panel>
             </div>
         </div>
     </div>
@@ -86,6 +78,6 @@
 <script src="./js/lib/bootstrap.min.js"></script>
 <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
 <script src="./js/lib/ie10-viewport-bug-workaround.js"></script>
-<script src="./js/lib/cytoscape.min.js"></script>
+
 </body>
 </html>
