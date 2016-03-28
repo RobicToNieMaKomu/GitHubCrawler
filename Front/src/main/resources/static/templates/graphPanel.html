@@ -4,6 +4,7 @@
 
     <div class="row">
         <p class="lead">{{subTitle}}</p>
+        <div id="cy"></div>
         <div class="col-md-2"> </div>
         <div class="col-md-8">
             <ng-crawler ng-show="type == 'crawler'"></ng-crawler>
@@ -12,6 +13,6 @@
         <div class="col-md-2"></div>
     </div>
 </div>
-<button class="btn btn-success" ng-click="mainCtl.request()">
+<button class="btn btn-success" ng-click="mainCtl.load(type)">
     <span class="glyphicon glyphicon-refresh"></span> Search
 </button>
