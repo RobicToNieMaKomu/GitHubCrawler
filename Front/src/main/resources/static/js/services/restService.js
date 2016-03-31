@@ -5,34 +5,27 @@ angular.module('githubCrawler').service('restService',
         var rsUrl = baseUrl + '/getRecent';
         var ftUrl = baseUrl + '/fullTopology';
         var ggUrl = baseUrl + '/getGraph?';
-        this.getRecentSearches = function() {
+        this.getRecentSearches = function(mainCtrl) {
             $http.get(rsUrl)
                 .success(function (data) {
-                    console.log("grejt success!" + data);
-                })
-                .error(function (evt) {
-                    console.log("uber fejl! " + rsUrl + evt);
+                    mainCtrl.recentSearches.splice(0, mainCtrl.recentSearches.length);
+                    for (var item in data) {
+                        var tuple = data[item];
+                        mainCtrl.recentSearches.push(tuple[0] + ':' + tuple[1]);
+                    }
+                    mainCtrl.recent = mainCtrl.recentSearches.length > 0 ? mainCtrl.recentSearches[0] : '';
                 });
-            return [];
         };
         this.getFullTopology = function(onSuccess) {
             $http.get(ftUrl)
                 .success(function (data) {
-                    console.log("grejt success!" + data);
                     onSuccess(data);
-                })
-                .error(function (evt) {
-                    console.log("uber fejl! " + ftUrl + evt);
                 });
         };
         this.getGraph = function(username, depth, onSuccess) {
             $http.get(ggUrl + 'user=' + username + "&depth=" + depth)
                 .success(function (data) {
-                    console.log("grejt success!" + data);
                     onSuccess(data);
-                })
-                .error(function (evt) {
-                    console.log("uber fejl! " + ggUrl + evt);
                 });
         };
     }

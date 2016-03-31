@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
-import java.util.stream.Collectors;
 
 /**
  * Created by RobicToNieMaKomu on 2015-12-12.
@@ -15,7 +14,7 @@ import java.util.stream.Collectors;
 @Service
 public class GraphsCache {
     private final ConcurrentMap<String, Map<String, Set<String>>> cache = new ConcurrentHashMap<>();
-    private final List<String> recentGraphs = new ArrayList<>();
+    private final List<Object[]> recentGraphs = new ArrayList<>();
     private final int recentGraphsCapacity;
 
     @Autowired
@@ -33,13 +32,11 @@ public class GraphsCache {
         if (recentGraphsCapacity == recentGraphs.size()) {
             recentGraphs.remove(0);
         }
-        recentGraphs.add(k);
+        recentGraphs.add(new Object[]{user, depth});
     }
 
-    public synchronized List<Map<String, Set<String>>> getRecent() {
-        return recentGraphs.stream()
-                .map(cache::get)
-                .collect(Collectors.toList());
+    public synchronized List<Object[]> getRecent() {
+        return Collections.unmodifiableList(recentGraphs);
     }
 
     public synchronized Map<String, Set<String>> getTopology() {

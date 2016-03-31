@@ -47,7 +47,7 @@ public class FrontController {
     }
 
     @RequestMapping("/getRecent")
-    public ResponseEntity<List<Map<String, Set<String>>>> getRecent() {
+    public ResponseEntity<?> getRecent() {
         return new ResponseEntity<>(frontDispatcher.getRecent(), OK);
     }
 }

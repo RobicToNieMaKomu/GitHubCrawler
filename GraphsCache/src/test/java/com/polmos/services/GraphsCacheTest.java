@@ -46,16 +46,15 @@ public class GraphsCacheTest {
         Map<String, Set<String>> graph1 = Collections.singletonMap("a", Collections.singleton("b"));
         Map<String, Set<String>> graph2 = Collections.singletonMap("b", Collections.singleton("c"));
         Map<String, Set<String>> graph3 = Collections.singletonMap("c", Collections.singleton("d"));
-
         cache.putGraph("x", 1, graph1);
         cache.putGraph("z", 2, graph2);
         cache.putGraph("y", 3, graph3);
 
-        Iterator<Map<String, Set<String>>> iterator = cache.getRecent().iterator();
-        assertEquals(graph1, iterator.next());
-        assertEquals(graph2, iterator.next());
-        assertEquals(graph3, iterator.next());
-        assertFalse(iterator.hasNext());
+        List<Object[]> recent = cache.getRecent();
+
+        assertTuple(recent.get(0), "x", 1);
+        assertTuple(recent.get(1), "z", 2);
+        assertTuple(recent.get(2), "y", 3);
     }
 
     @Test
@@ -64,15 +63,14 @@ public class GraphsCacheTest {
         Map<String, Set<String>> graph1 = Collections.singletonMap("a", Collections.singleton("b"));
         Map<String, Set<String>> graph2 = Collections.singletonMap("b", Collections.singleton("c"));
         Map<String, Set<String>> graph3 = Collections.singletonMap("c", Collections.singleton("d"));
-
         cache.putGraph("x", 1, graph1);
         cache.putGraph("z", 2, graph2);
         cache.putGraph("y", 3, graph3);
 
-        Iterator<Map<String, Set<String>>> iterator = cache.getRecent().iterator();
-        assertEquals(graph2, iterator.next());
-        assertEquals(graph3, iterator.next());
-        assertFalse(iterator.hasNext());
+        List<Object[]> recent = cache.getRecent();
+
+        assertTuple(recent.get(0), "z", 2);
+        assertTuple(recent.get(1), "y", 3);
     }
 
     @Test
@@ -124,6 +122,11 @@ public class GraphsCacheTest {
         Set<String> result = new HashSet<>();
         Collections.addAll(result, nodes);
         return result;
+    }
+
+    private void assertTuple(Object [] tuple, String exU, int exD) {
+        assertEquals(exU, tuple[0]);
+        assertEquals(exD, tuple[1]);
     }
 
 

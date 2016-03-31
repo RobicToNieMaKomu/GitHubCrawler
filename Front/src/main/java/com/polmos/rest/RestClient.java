@@ -60,7 +60,7 @@ public class RestClient {
         return template.getForEntity(config.getFullTopology(), Map.class).getBody();
     }
 
-    public List<Map<String, Set<String>>> getRecent() {
+    public List<Object[]> getRecent() {
         return template.getForEntity(config.getRecent(), List.class).getBody();
     }
 

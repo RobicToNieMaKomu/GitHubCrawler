@@ -55,7 +55,7 @@ public class GraphsCacheResource {
     }
 
     @RequestMapping("/getRecent")
-    public ResponseEntity<?> getRecent() {
+    public ResponseEntity<List<Object[]>> getRecent() {
         return new ResponseEntity<>(cache.getRecent(), OK);
     }
 

@@ -38,7 +38,7 @@ public class FrontDispatcher {
         return client.getFullTopology();
     }
 
-    public List<Map<String, Set<String>>> getRecent() {
+    public List<Object[]> getRecent() {
         return client.getRecent();
     }
 }
