@@ -1,16 +1,24 @@
 angular.module('githubCrawler').service('graphService',
-     function() {
-        console.log('graph service!');
-        this.drawGraph = function(data) {
-            console.log(data);
-            var graph = new Graph(data);
-            var edges = graph.toEdges(data);
-            var nodes = graph.toNodes(data);
-            console.log('edges:' + edges);
-            console.log('nodes:' + nodes);
-            new Grapher().draw(nodes, edges);
-        };
-     }
+     [
+        'csLayoutFactory',
+        function(csLayoutFactory) {
+            console.log('graph service!');
+            var that = this;
+            var draw = function(data, type) {
+                var graph = new Graph(data);
+                var edges = graph.toEdges(data);
+                var nodes = graph.toNodes(data);
+                new Grapher().draw(nodes, edges, type);
+            };
+            this.recentGraph = {};
+            this.drawGraph = function(data) {
+                that.recentGraph = data;
+                draw(data, csLayoutFactory.getDefault());
+            };
+            this.redraw = function(type) {
+               draw(that.recentGraph, type);
+            };
+     }]
 );
 
 function Graph(data) {
@@ -58,63 +66,45 @@ function Graph(data) {
 }
 
 function Grapher() {
-    this.showLoadingTxt = function() {
-        $('#cy').append("<strong>Loading data...</strong>");
-    };
-    this.hideLoadingTxt = function() {
-        $('#cy').html('');
-    };
-    this.draw = function(n, e) {
-    $('#cy').css("text-align","left");
-    $('#cy').css("width",$('.row').width());
-    $('#cy').css("height","300px");
-    $('#cy').css("border","1px solid");
+    this.draw = function(n, e, l) {
+        $('#cy').css("text-align","left");
+        $('#cy').css("width",$('.row').width());
+        var h = 2 * $('.site-wrapper').height()/5;// - $('.cover-heading.ng-binding').height() - $('.lead.ng-binding').height() - $('.inner').height();
+        $('#cy').css("height", "" + h + "px");
+        $('#cy').css("border","1px solid");
 
-    var cy = cytoscape({
-      container: $('#cy')[0],
+        var cy = cytoscape({
+          container: $('#cy')[0],
 
-      boxSelectionEnabled: false,
-      autounselectify: true,
+          boxSelectionEnabled: false,
+          autounselectify: true,
 
-      style: cytoscape.stylesheet()
-        .selector('node')
-          .css({
-            'content': 'data(name)',
-            'text-valign': 'center',
-            'color': 'white',
-            'text-outline-width': 2,
-            'text-outline-color': '#888'
-          })
-        .selector(':selected')
-          .css({
-            'background-color': 'black',
-            'line-color': 'black',
-            'target-arrow-color': 'black',
-            'source-arrow-color': 'black',
-            'text-outline-color': 'black'
-          })
-        .selector('.faded')
-          .css({
-            'opacity': 0.25,
-            'text-opacity': 0
-         }),
-
-      elements: {
-        nodes: n,
-        edges: e
-      },
-
-      layout: {
-        name: 'breadthfirst',
-        concentric: function() {
-            return this.data('weight');
-        },
-        levelWidth: function(nodes) {
-            return 10;
-        },
-        padding: 10
-      }
-    });
-    $("#cy").show();
-}
+          style: cytoscape.stylesheet()
+            .selector('node')
+              .css({
+                'content': 'data(name)',
+                'text-valign': 'center',
+                'color': 'white',
+                'text-outline-width': 2,
+                'text-outline-color': '#888'
+              })
+            .selector(':selected')
+              .css({
+                'background-color': 'black',
+                'line-color': 'black'
+              })
+            .selector('.faded')
+              .css({
+                'opacity': 0.25,
+                'text-opacity': 0
+             }),
+          elements: {
+            nodes: n,
+            edges: e
+          },
+          layout: l
+        });
+        $("#cy").show();
+        cy.center();
+    }
 }

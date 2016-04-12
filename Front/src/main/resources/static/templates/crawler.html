@@ -3,6 +3,7 @@
     <tr>
         <th>Username</th>
         <th>Depth of the search</th>
+        <th>Select layout</th>
     </tr>
     </thead>
     <tbody>
@@ -13,12 +14,27 @@
             </div>
         </td>
         <td>
-            <div class="btn-group pull-left">
+            <div class="btn-group pull-center">
                 <button data-toggle="dropdown" class="btn dropdown-toggle btn-primary"><span
                         class="glyphicon glyphicon-collapse-down"></span> {{mainCtl.depth}}
                 </button>
                 <ul class="dropdown-menu">
                     <li ng-repeat="depth in mainCtl.depthOfSearch"><a href="#" ng-click="mainCtl.set('depth', depth)">{{depth}}</a>
+                    </li>
+                </ul>
+            </div>
+        </td>
+        <td>
+            <div class="btn-group pull-center">
+                <button data-toggle="dropdown" class="btn dropdown-toggle btn-primary">
+                    <span class="glyphicon glyphicon-collapse-down"></span>
+                    {{mainCtl.currLayout.name}}
+                </button>
+                <ul class="dropdown-menu">
+                    <li ng-repeat="layout in mainCtl.layouts">
+                        <a href="#" ng-click="mainCtl.setLayout(layout)">
+                            {{layout.name}}
+                        </a>
                     </li>
                 </ul>
             </div>

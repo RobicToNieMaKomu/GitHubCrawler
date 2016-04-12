@@ -4,9 +4,7 @@ angular.module('githubCrawler').directive('ngPanel',
         scope: {
               title: '@',
               subTitle: '@',
-              showForm: '@',
-              type: '@',
-              showCanvas: '@'
+              type: '@'
         },
         controller: 'mainController',
         controllerAs: 'mainCtl',

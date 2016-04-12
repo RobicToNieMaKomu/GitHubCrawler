@@ -16,16 +16,24 @@ angular.module('githubCrawler').service('restService',
                     mainCtrl.recent = mainCtrl.recentSearches.length > 0 ? mainCtrl.recentSearches[0] : '';
                 });
         };
-        this.getFullTopology = function(onSuccess) {
+        this.getFullTopology = function(onSuccess, showCytoscape) {
+            showCytoscape(true);
             $http.get(ftUrl)
                 .success(function (data) {
                     onSuccess(data);
-                });
+                })
+                .error(function(evt) {
+                    showCytoscape(false);
+                });;
         };
-        this.getGraph = function(username, depth, onSuccess) {
+        this.getGraph = function(username, depth, onSuccess, showCytoscape) {
+            showCytoscape(true);
             $http.get(ggUrl + 'user=' + username + "&depth=" + depth)
                 .success(function (data) {
                     onSuccess(data);
+                })
+                .error(function(evt) {
+                    showCytoscape(false);
                 });
         };
     }

@@ -32,8 +32,6 @@ angular.module('githubCrawler').controller(
             this.panel = panels['crawler'];
             this.setPanel = function(what) {
                 this.panel = panels[what];
-                // this is not very clear but at least it works
-                $("#cy").hide();
             }
 		}
 );
