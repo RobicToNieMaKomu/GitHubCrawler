@@ -2,7 +2,6 @@ angular.module('githubCrawler').service('graphService',
      [
         'csLayoutFactory',
         function(csLayoutFactory) {
-            console.log('graph service!');
             var that = this;
             var draw = function(data, type) {
                 var graph = new Graph(data);
@@ -72,6 +71,7 @@ function Grapher() {
         var h = 2 * $('.site-wrapper').height()/5;// - $('.cover-heading.ng-binding').height() - $('.lead.ng-binding').height() - $('.inner').height();
         $('#cy').css("height", "" + h + "px");
         $('#cy').css("border","1px solid");
+        $('#cy').css("background", "#265B6A");
 
         var cy = cytoscape({
           container: $('#cy')[0],

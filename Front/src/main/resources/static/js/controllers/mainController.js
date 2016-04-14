@@ -6,9 +6,8 @@ angular.module('githubCrawler').controller(
 				'graphService',
 				'csLayoutFactory',
 				function($scope, restService, graphService, csLayoutFactory) {
-					console.log('mainController!' + $scope.type);
                     var that = this;
-					this.recentSearches = [ 'a', 'b', 'c' ];
+					this.recentSearches = [];
 					this.recent = this.recentSearches[0];
 					this.depthOfSearch = ['1', '2', '3'];
                     this.depth = this.depthOfSearch[0];

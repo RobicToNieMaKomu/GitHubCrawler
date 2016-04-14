@@ -1,10 +1,43 @@
-<div class="btn-group">
-    <button data-toggle="dropdown" class="btn dropdown-toggle btn-primary"><span
-            class="glyphicon glyphicon-collapse-down"></span> {{mainCtl.recent}}
-    </button>
-    <ul class="dropdown-menu">
-        <li ng-repeat="recent in mainCtl.recentSearches"><a href="#" ng-click="mainCtl.set('recent', recent)">{{recent}}</a>
-        </li>
-    </ul>
-    <hr>
+<div class="col-md-2"> </div>
+<div class="col-md-8">
+<table class="table">
+    <thead>
+    <tr>
+        <th>Recent search</th>
+        <th>Select layout</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>
+            <div class="btn-group pull-left">
+                <button data-toggle="dropdown" class="btn dropdown-toggle btn-primary"><span
+                        class="glyphicon glyphicon-collapse-down"></span> {{mainCtl.recent}}
+                </button>
+                <ul class="dropdown-menu">
+                    <li ng-repeat="recent in mainCtl.recentSearches"><a href="#" ng-click="mainCtl.set('recent', recent)">{{recent}}</a>
+                    </li>
+                </ul>
+                <hr>
+            </div>
+        </td>
+        <td>
+            <div class="btn-group pull-left">
+                <button data-toggle="dropdown" class="btn dropdown-toggle btn-primary">
+                    <span class="glyphicon glyphicon-collapse-down"></span>
+                    {{mainCtl.currLayout.name}}
+                </button>
+                <ul class="dropdown-menu">
+                    <li ng-repeat="layout in mainCtl.layouts">
+                        <a href="#" ng-click="mainCtl.setLayout(layout)">
+                            {{layout.name}}
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </td>
+    </tr>
+    </tbody>
+</table>
 </div>
+<div class="col-md-2"> </div>

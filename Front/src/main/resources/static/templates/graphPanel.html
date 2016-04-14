@@ -1,20 +1,14 @@
 <h1 class="cover-heading">{{title}}</h1>
-
 <div id="mainPanel" class="container-fluid">
-
     <div class="row">
         <p class="lead">{{subTitle}}</p>
-
         <div id="cy" ng-show="mainCtl.isCsVisible"></div>
-
-        <div class="col-md-1"> </div>
-        <div class="col-md-10">
-            <ng-crawler ng-show="type == 'crawler'"></ng-crawler>
-            <ng-recent-searches ng-show="type == 'recentSearches'"></ng-recent-searches>
-        </div>
-        <div class="col-md-1"></div>
-        <br/>
+        <ng-crawler ng-show="type == 'crawler'"></ng-crawler>
+        <ng-recent-searches ng-show="type == 'recentSearches'"></ng-recent-searches>
+        <ng-full-topology ng-show="type == 'fullTopology'"></ng-full-topology>
     </div>
+    <br/>
+</div>
 </div>
 
 <button class="btn btn-success" ng-click="mainCtl.load(type)">

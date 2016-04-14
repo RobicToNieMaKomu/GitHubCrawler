@@ -1,6 +1,5 @@
 angular.module('githubCrawler').service('csLayoutFactory',
     function() {
-        console.log('csLayoutFactory');
         var ls = {
                 'concentric' : {
                     name: 'concentric',
@@ -27,7 +26,7 @@ angular.module('githubCrawler').service('csLayoutFactory',
                 }
         };
         this.getDefault = function() {
-            return ls['concentric'];
+            return ls['Grid'];
         };
         this.allLayouts = function() {
             return ls;

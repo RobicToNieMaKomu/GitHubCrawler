@@ -1,0 +1,18 @@
+<div class="col-md-4"> </div>
+<div class="col-md-4">
+        <div class="btn-group pull-center">
+            <p>Select layout</p>
+            <button data-toggle="dropdown" class="btn dropdown-toggle btn-primary">
+                <span class="glyphicon glyphicon-collapse-down"></span>
+                {{mainCtl.currLayout.name}}
+            </button>
+            <ul class="dropdown-menu">
+                <li ng-repeat="layout in mainCtl.layouts">
+                    <a href="#" ng-click="mainCtl.setLayout(layout)">
+                        {{layout.name}}
+                    </a>
+                </li>
+            </ul>
+        </div>
+</div>
+<div class="col-md-4"> </div>

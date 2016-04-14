@@ -5,7 +5,6 @@ angular.module('githubCrawler').controller(
                         {name : 'Full topology', id : 'fullTopology'}];
 
             var Panel = function(title, subtitle, type) {
-                console.log('new panel:' + title);
                 this.title = title;
                 this.subtitle = subtitle;
                 this.type = type;
